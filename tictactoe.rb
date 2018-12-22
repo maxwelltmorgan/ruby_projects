@@ -45,11 +45,13 @@ class TicTacToe
 
     def play_round
         while @game_over == false
-            puts "#{current_player}'s turn"
+            puts "Go #{current_player} Go!!!"
+            puts ''
             puts "Enter # to make your play"
             selection = gets.to_i - 1
 
             if @board[selection] != "X" && @board[selection] != "O"
+                system "clear" or system "cls"
                 update_board(selection)
                 show_board
                 winner
@@ -72,8 +74,8 @@ class TicTacToe
     ]
 
     def winner
-        if tie
-            puts "It's a tie"
+        if draw
+            puts "IT'S A DRAW"
             toggle_game
         end
 
@@ -88,7 +90,7 @@ class TicTacToe
         }
     end
 
-    def tie
+    def draw
         @board.all? { |x| x == 'X' || x == 'O' }
     end
 
@@ -102,6 +104,7 @@ puts ''
 puts "Enter player 2 name"
 p2 = gets.chomp
 a = TicTacToe.new(p1,p2)
+system "clear" or system "cls"
 a.show_board
 
 a.play_round
