@@ -12,4 +12,12 @@ def substring(phrase, words)
 	puts substrings
 end
 
-substring("im going to the beach",['a','go','he'])
+print "What's your phase?"
+a = gets.chomp
+
+puts "Whats words should we total?"
+b = gets.chomp.split(" ")
+
+puts "#{substring(a,b)}"
+
+#substring("im going to the beach",['a','go','he'])
