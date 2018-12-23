@@ -1,6 +1,6 @@
 class TicTacToe
 
-    def initialize(player1 = 'Player 1', player2 = 'Player 2')
+    def initialize(player1 = "Player 1", player2 = "Player 2")
         @player1_name = player1
         @player2_name = player2
         @board = [1,2,3,4,5,6,7,8,9]
@@ -55,6 +55,7 @@ class TicTacToe
                 update_board(selection)
                 show_board
                 winner
+                draw_game
             else
                 puts "Position already taken"
                 play_round
@@ -74,10 +75,6 @@ class TicTacToe
     ]
 
     def winner
-        if draw
-            puts "IT'S A DRAW"
-            toggle_game
-        end
 
         WIN_COMBO.each { |combo|
             if @board[combo[0]] == 'X' && @board[combo[1]] == 'X' && @board[combo[2]] == 'X'
@@ -88,23 +85,38 @@ class TicTacToe
                 toggle_game
             end
         }
+
+
+
     end
 
     def draw
         @board.all? { |x| x == 'X' || x == 'O' }
     end
 
+    def draw_game
+        if draw && @game_over == false
+            puts "It's a draw"
+            puts ''
+            toggle_game
+        end
+    end
+
 end
 
-puts "Welcome to TIC TAC TOE"
-puts ''
-puts "Enter player 1 name"
-p1 = gets.chomp
-puts ''
-puts "Enter player 2 name"
-p2 = gets.chomp
-a = TicTacToe.new(p1,p2)
-system "clear" or system "cls"
-a.show_board
+def welcome
+    puts "Welcome to TIC TAC TOE"
+    puts ''
+    puts "Enter player 1 name"
+    @p1 = gets.chomp
+    puts ''
+    puts "Enter player 2 name"
+    @p2 = gets.chomp
+    system "clear" or system "cls"
+end
 
+
+welcome
+a = TicTacToe.new(@p1,@p2)
+a.show_board
 a.play_round
